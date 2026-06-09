@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-display: 'Montserrat', sans-serif;
+  --font-body: 'Open Sans', sans-serif;
+
+  /* Dark mode by default for immersive media experience */
+  --background: 240 10% 4%;
+  --foreground: 0 0% 100%;
+  
+  --card: 240 10% 6%;
+  --card-foreground: 0 0% 100%;
+ 
+  --popover: 240 10% 6%;
+  --popover-foreground: 0 0% 100%;
+ 
+  --primary: 340 82% 52%; /* Vibrant Pink/Red for news actions */
+  --primary-foreground: 0 0% 100%;
+ 
+  --secondary: 240 6% 15%;
+  --secondary-foreground: 0 0% 100%;
+ 
+  --muted: 240 4% 20%;
+  --muted-foreground: 240 5% 65%;
+ 
+  --accent: 260 80% 60%; /* Purple accent */
+  --accent-foreground: 0 0% 100%;
+ 
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+
+  --border: 240 4% 16%;
+  --input: 240 4% 16%;
+  --ring: 340 82% 52%;
+  
+  --radius: 0.75rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased selection:bg-primary/30;
+    font-family: var(--font-body);
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    @apply tracking-tight;
+  }
+}
+
+@layer utilities {
+  .snap-y-mandatory {
+    scroll-snap-type: y mandatory;
+  }
+  .snap-start {
+    scroll-snap-align: start;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  }
+}

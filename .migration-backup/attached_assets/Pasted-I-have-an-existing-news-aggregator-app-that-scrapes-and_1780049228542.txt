@@ -1,0 +1,82 @@
+I have an existing news aggregator app that scrapes and displays world tech news by region. I want to extend it — do NOT rebuild or restructure the existing app. Only add what is described below.
+
+## What to add: Middle East as a new region, under the "Tech" category
+
+The app already has a concept of regions (e.g. Global, Europe). Follow exactly the same pattern used for existing regions. Add "Middle East" as a new region entry, with its own set of RSS feed sources, all tagged under the "Tech" category.
+
+---
+
+## New region entry to add
+
+Region name: Middle East
+Category: Tech
+
+### RSS feed sources to register under this region
+
+#### Startups & ecosystem
+- MENAbytes:         https://www.menabytes.com/feed/
+- Wamda:             https://www.wamda.com/feed
+- Fast Company ME:   https://fastcompanyme.com/feed/
+
+#### Government policy & digital strategy
+- Arabian Business Tech: https://www.arabianbusiness.com/technology/feed
+- Arab News Tech:        https://www.arabnews.com/taxonomy/term/10252/feed
+- Zawya Tech:            https://www.zawya.com/en/rss/technology
+- Gulf Business Tech:    https://gulfbusiness.com/category/technology/feed/
+
+#### Enterprise tech & deep coverage
+- Wired Middle East: https://wired.me/feed/
+- ITP.net:           https://www.itp.net/feed
+
+#### Fintech & digital finance
+- Fintech News ME:   https://fintechnews.ae/feed/
+- Economy Middle East: https://www.economy.ae/feed/
+
+---
+
+## Interest filter keywords for Middle East articles
+
+When tagging articles from these sources, use these keyword groups in addition to any global tags already in use:
+
+- AI & Sovereign Tech: Vision 2030, NEOM, SDAIA, sovereign AI, sovereign cloud, data residency, geopatriation, UAE AI, Saudi AI
+- Startups & Funding: MENA startup, Series A, Series B, seed round, Wamda Capital, Impact46, Mubadala, STV, Gulf investors
+- Fintech & Payments: BNPL, neobank, digital banking, remittance, UAE fintech, Saudi fintech, Bahrain fintech, ADGM, DIFC
+- Government & Policy: Vision 2030, UAE digital economy, smart city, e-government, national AI strategy, data protection law, cybersecurity law
+- Infrastructure & Cloud: hyperscaler, data center UAE, cloud region Saudi, AWS Middle East, Azure UAE, Google Cloud KSA
+- General MENA Tech: (catch-all for Middle East sources not matched above)
+
+---
+
+## Data model changes (if applicable)
+
+If the articles table has a "region" column, add "middle-east" as a valid value alongside existing entries like "global" and "europe".
+
+No schema migration needed if the column already accepts free-text strings.
+
+---
+
+## UI changes
+
+1. Add "Middle East" to the existing region filter/tab bar — same style as existing region tabs
+2. No new pages needed — the existing filtered view should work as-is once the region is registered
+3. If there is a region dropdown or sidebar, add "Middle East" in alphabetical or logical order after "Europe"
+
+---
+
+## Constraints — do not change
+
+- Do not modify existing source lists, categories, or routes
+- Do not change the DB schema beyond what is needed
+- Do not change the frontend layout or styling
+- Do not rename or refactor existing variables or functions
+- Follow the exact same code pattern used to register Europe or Global sources
+
+---
+
+## Verification checklist once done
+
+- [ ] Middle East tab/filter appears in the UI
+- [ ] At least 5 articles load from Middle East sources on first scrape
+- [ ] Articles are tagged with correct region = "middle-east"
+- [ ] Category tags (AI & Sovereign Tech, Startups & Funding, etc.) appear on article cards
+- [ ] Existing Global and Europe feeds are unaffected

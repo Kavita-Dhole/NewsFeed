@@ -1,0 +1,100 @@
+2026-05-29 14:33:32.40
+7687699f
+User
+Could not parse CSS stylesheet
+2026-05-29 14:33:37.08
+7687699f
+User
+throw er; // Unhandled 'error' event
+2026-05-29 14:33:37.08
+7687699f
+User
+at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2026-05-29 14:33:37.08
+7687699f
+User
+at ou.emit (node:events:524:28)
+2026-05-29 14:33:37.08
+7687699f
+User
+_maxListeners: undefined,
+2026-05-29 14:33:37.08
+7687699f
+User
+at ou.r (/home/runner/workspace/dist/index.cjs:64:13559)
+2026-05-29 14:33:37.08
+7687699f
+User
+database: 'neondb',
+2026-05-29 14:33:37.08
+7687699f
+User
+at Tm.parse (/home/runner/workspace/dist/index.cjs:63:42497)
+2026-05-29 14:33:37.08
+7687699f
+User
+^
+2026-05-29 14:33:37.08
+7687699f
+User
+at Tm.handlePacket (/home/runner/workspace/dist/index.cjs:63:43865)
+2026-05-29 14:33:37.08
+7687699f
+User
+at TLSSocket.<anonymous> (/home/runner/workspace/dist/index.cjs:63:47921)
+2026-05-29 14:33:37.08
+7687699f
+User
+errorMessage: [Function: bound _handleErrorMessage],
+2026-05-29 14:33:37.08
+7687699f
+User
+at ou._handleErrorMessage (/home/runner/workspace/dist/index.cjs:64:8703)
+2026-05-29 14:33:37.08
+7687699f
+User
+at Om.emit (node:events:524:28)
+2026-05-29 14:33:37.08
+7687699f
+User
+dataRow: [Function: bound _handleDataRow],
+2026-05-29 14:33:37.08
+7687699f
+User
+authenticationSASLContinue: [Function: bound _handleAuthSASLContinue] AsyncFunction,
+2026-05-29 14:33:37.08
+7687699f
+User
+Emitted 'error' event on instance at:
+2026-05-29 14:33:37.08
+7687699f
+User
+error: terminating connection due to administrator command
+2026-05-29 14:33:37.08
+7687699f
+User
+at /home/runner/workspace/dist/index.cjs:63:50560
+2026-05-29 14:33:37.08
+7687699f
+User
+at Tm.parseErrorMessage (/home/runner/workspace/dist/index.cjs:63:47233)
+2026-05-29 14:33:37.08
+7687699f
+User
+at Readable.push (node:internal/streams/readable:392:5)
+2026-05-29 14:33:37.08
+7687699f
+User
+at ou._handleErrorEvent (/home/runner/workspace/dist/index.cjs:64:8566)
+2026-05-29 14:33:37.08
+7687699f
+User
+at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23)
+2026-05-29 14:33:37.08
+7687699f
+User
+at addChunk (node:internal/streams/readable:561:12)
+2026-05-29 14:33:37.08
+7687699f
+User
+node:events:502

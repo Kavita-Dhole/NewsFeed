@@ -1,0 +1,27 @@
+kind = "mobile"
+previewPath = "/news-mobile/"
+title = "NewsFeed iOS"
+version = "1.0.0"
+id = "artifacts/news-mobile"
+router = "expo-domain"
+
+[[integratedSkills]]
+name = "expo"
+version = "1.0.0"
+
+[[services]]
+ensurePreviewReachable = "/status"
+name = "expo"
+paths = [ "/news-mobile/" ]
+localPort = 21257
+
+[services.development]
+run = "pnpm --filter @workspace/news-mobile run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/news-mobile", "run", "build" ]
+run = [ "pnpm", "--filter", "@workspace/news-mobile", "run", "serve" ]
+
+[services.env]
+PORT = "21257"
+BASE_PATH = "/news-mobile/"

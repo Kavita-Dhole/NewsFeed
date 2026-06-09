@@ -1,0 +1,270 @@
+============================================================
+REPLIT INTEGRATION PROMPT — ALL REGIONS: GENERAL + TECH NEWS
+============================================================
+
+I have an existing news aggregator app that already scrapes tech news by region
+(Global Tech, Europe Tech, Middle East Tech). I want to extend it with two things:
+
+  1. Add general/world news feeds alongside the existing tech feeds for each region
+  2. Restructure regions to match the following 5 group model:
+
+      🇪🇺 Europe     — Belgium, Netherlands, France, Germany, South/North Europe
+      🌍 Middle East — UAE, broader MENA
+      🌏 Asia        — India, China, SE Asia, East Asia
+      🌎 Americas    — USA, Canada, Brazil, Mexico, LatAm
+      🌐 Rest of World — Africa, Oceania, World
+
+DO NOT rebuild or restructure the existing app. Only add/update what is described below.
+Follow exactly the same patterns already used to register sources and regions.
+
+==============================================================
+CONFIRMATION: CURRENT FEEDS ARE TECH-ONLY
+==============================================================
+
+The existing feeds (TechCrunch, InfoQ, Sifted, MENAbytes, Inc42, e27, etc.)
+are all tech-category sources. None cover general world news.
+This prompt adds a second "General News" category layer to each region.
+
+Each article should be tagged with:
+  - region  (e.g. "europe", "middle-east", "asia", "americas", "rest-of-world")
+  - category: "Tech" OR "General News"
+  - sub_region (optional, e.g. "Belgium", "India", "Brazil") derived from source metadata
+
+==============================================================
+SECTION 1 — 🇪🇺 EUROPE
+==============================================================
+
+--- GENERAL NEWS FEEDS ---
+
+Pan-Europe:
+  Euronews (all):         https://feeds.feedburner.com/euronews/en/home/
+  Euronews (my Europe):   https://www.euronews.com/my-europe/rss
+  EUobserver:             https://euobserver.com/rss.xml
+  France 24 Europe:       https://www.france24.com/en/europe/rss
+  Reuters Europe:         https://feeds.reuters.com/reuters/EuropeanNewsHeadlines
+
+Belgium:
+  VRT NWS (English):      https://www.vrt.be/vrtnws/en/rss/articles.xml
+  Le Soir:                https://www.lesoir.be/arc/outboundfeeds/rss/
+  The Brussels Times:     https://www.brusselstimes.com/feed
+
+Netherlands:
+  NRC:                    https://www.nrc.nl/rss/
+  DutchNews.nl:           https://www.dutchnews.nl/feed/
+
+France:
+  France 24 (EN):         https://www.france24.com/en/rss
+  Le Monde (EN):          https://www.lemonde.fr/en/rss/une.xml
+
+Germany:
+  Deutsche Welle:         https://rss.dw.com/rdf/rss-en-all
+  The Local Germany:      https://www.thelocal.de/feed/
+
+--- TECH FEEDS (existing + additions) ---
+
+  Sifted:                 https://sifted.eu/feed
+  EU-Startups:            https://www.eu-startups.com/feed/
+  Tech.eu:                https://tech.eu/feed/
+  Politico EU Tech:       https://www.politico.eu/section/technology/feed/
+  Euractiv Digital:       https://www.euractiv.com/sections/digital/feed/
+  ZDNet:                  https://www.zdnet.com/news/rss.xml
+
+==============================================================
+SECTION 2 — 🌍 MIDDLE EAST
+==============================================================
+
+--- GENERAL NEWS FEEDS ---
+
+  Al Jazeera (Middle East): https://www.aljazeera.com/xml/rss/all.xml
+  Arab News:                https://www.arabnews.com/rss.xml
+  Gulf News:                https://gulfnews.com/rss
+  The National (UAE):       https://www.thenationalnews.com/rss
+  Khaleej Times:            https://www.khaleejtimes.com/rss
+
+--- TECH FEEDS (existing) ---
+
+  MENAbytes:              https://www.menabytes.com/feed/
+  Wamda:                  https://www.wamda.com/feed
+  Arabian Business Tech:  https://www.arabianbusiness.com/technology/feed
+  Zawya Tech:             https://www.zawya.com/en/rss/technology
+  Wired Middle East:      https://wired.me/feed/
+  Gulf Business Tech:     https://gulfbusiness.com/category/technology/feed/
+  Fintech News ME:        https://fintechnews.ae/feed/
+
+==============================================================
+SECTION 3 — 🌏 ASIA
+==============================================================
+
+Sub-regions: India, China, SE Asia, East Asia (Japan, South Korea)
+
+--- GENERAL NEWS FEEDS ---
+
+India:
+  NDTV:                   https://feeds.feedburner.com/ndtvnews-top-stories
+  The Hindu:              https://www.thehindu.com/feeder/default.rss
+  Hindustan Times:        https://www.hindustantimes.com/feeds/rss/topnews/rssfeed.xml
+  Times of India:         https://timesofindia.indiatimes.com/rssfeedstopstories.cms
+
+China / East Asia:
+  CGTN World:             https://www.cgtn.com/subscribe/feeds/rss2.0/cgtn.xml
+  South China Morning Post: https://www.scmp.com/rss/91/feed
+  Japan Times:            https://www.japantimes.co.jp/feed/
+  Korea Herald:           https://www.koreaherald.com/common/rss_xml.php?ct=102
+
+SE Asia / Pan-Asia:
+  Channel NewsAsia:       https://www.channelnewsasia.com/api/v1/rss-outbound-feed?_format=xml
+  Straits Times:          https://www.straitstimes.com/news/asia/rss.xml
+  Bangkok Post:           https://www.bangkokpost.com/rss/data/topstories.xml
+
+--- TECH FEEDS (existing + additions) ---
+
+India:
+  Inc42:                  https://inc42.com/feed/
+  YourStory:              https://yourstory.com/feed
+  ET Tech:                https://economictimes.indiatimes.com/tech/rssfeeds/13357270.cms
+  MediaNama:              https://www.medianama.com/feed/
+
+SE Asia:
+  e27:                    https://e27.co/feed/
+  Tech in Asia:           https://www.techinasia.com/feed
+  Vulcan Post:            https://vulcanpost.com/feed
+
+China / East Asia:
+  TechNode:               https://technode.com/feed/
+  KrASIA:                 https://kr-asia.com/feed/
+  Pandaily:               https://pandaily.com/feed/
+
+==============================================================
+SECTION 4 — 🌎 AMERICAS
+==============================================================
+
+Sub-regions: USA, Canada, Brazil, Mexico, Latin America
+
+--- GENERAL NEWS FEEDS ---
+
+USA / North America:
+  NPR News:               https://feeds.npr.org/1001/rss.xml
+  Associated Press:       https://apnews.com/rss
+  Reuters US:             https://feeds.reuters.com/reuters/USNewsHeadlines
+  Washington Post World:  https://feeds.washingtonpost.com/rss/world
+  NBC News:               https://feeds.nbcnews.com/nbcnews/public/news
+
+Canada:
+  CBC News:               https://www.cbc.ca/cmlink/rss-topstories
+  Globe and Mail:         https://www.theglobeandmail.com/rss/article/
+
+Brazil / Latin America:
+  Reuters Latin America:  https://feeds.reuters.com/reuters/MexicoHeadlines
+  Mercopress:             https://en.mercopress.com/rss
+  Rio Times:              https://www.riotimesonline.com/feed/
+
+--- TECH FEEDS (existing + additions) ---
+
+USA:
+  TechCrunch:             https://techcrunch.com/feed/
+  Crunchbase News:        https://news.crunchbase.com/feed/
+  Axios Tech:             https://api.axios.com/feed/technology
+  Politico Tech:          https://www.politico.com/rss/technology.xml
+  TechRepublic:           https://www.techrepublic.com/rssfeeds/articles/
+
+Canada:
+  Betakit:                https://betakit.com/feed/
+
+Latin America:
+  LatamList:              https://latamlist.com/feed/
+  Latam Republic:         https://www.latamrepublic.com/feed/
+  Contxto:                https://contxto.com/en/feed/
+
+==============================================================
+SECTION 5 — 🌐 REST OF WORLD (Africa, Oceania, World)
+==============================================================
+
+--- GENERAL NEWS FEEDS ---
+
+Africa:
+  BBC Africa:             https://feeds.bbci.co.uk/news/world/africa/rss.xml
+  Africanews:             https://www.africanews.com/feed/rss
+  AllAfrica:              https://allafrica.com/tools/headlines/rdf/latest/headlines.rdf
+  Daily Nation (Kenya):   https://nation.africa/kenya/rss
+
+Oceania / Australia:
+  ABC Australia:          https://www.abc.net.au/news/feed/51120/rss.xml
+  NZ Herald:              https://www.nzherald.co.nz/arc/outboundfeeds/rss/
+
+Global / World:
+  BBC World:              https://feeds.bbci.co.uk/news/world/rss.xml
+  Al Jazeera (World):     https://www.aljazeera.com/xml/rss/all.xml
+  France 24 (World):      https://www.france24.com/en/rss
+  Reuters World:          https://feeds.reuters.com/reuters/topNews
+
+--- TECH FEEDS ---
+
+Africa:
+  Techpoint Africa:       https://techpoint.africa/feed/
+  Disrupt Africa:         https://disruptafrica.com/feed/
+  IT News Africa:         https://www.itnewsafrica.com/feed/
+  Technext:               https://technext24.com/feed/
+
+Australia & Pacific:
+  ITnews Australia:       https://www.itnews.com.au/rss/rss.ashx
+  SmartCompany:           https://www.smartcompany.com.au/feed/
+  Startup Daily:          https://www.startupdaily.net/feed/
+  InnovationAus:          https://www.innovationaus.com/feed/
+
+==============================================================
+DATA MODEL CHANGES
+==============================================================
+
+If the articles table has a "category" column, ensure it accepts both:
+  - "Tech"
+  - "General News"
+
+If there is a "sub_region" column or equivalent, map it from source_name:
+  e.g. VRT NWS → sub_region = "Belgium"
+       Inc42    → sub_region = "India"
+       LatamList → sub_region = "Latin America"
+
+No schema migration needed if columns already accept free-text strings.
+
+==============================================================
+UI CHANGES
+==============================================================
+
+1. Each region tab (Europe, Middle East, Asia, Americas, Rest of World) should show
+   ALL articles by default (Tech + General News combined), sorted by date.
+
+2. Add a secondary filter within each region tab:
+     [All] [Tech] [General News]
+   Style it the same way as any existing secondary filters.
+
+3. The existing Global Tech tab/view should remain untouched.
+
+4. Region names in the tab bar should use the emoji + name as listed:
+     🇪🇺 Europe | 🌍 Middle East | 🌏 Asia | 🌎 Americas | 🌐 Rest of World
+
+==============================================================
+CONSTRAINTS — DO NOT CHANGE
+==============================================================
+
+- Do not modify existing source lists, routes, or feed registration logic
+- Do not change DB schema beyond what is strictly necessary
+- Do not rename or refactor existing variables or functions
+- Do not change frontend layout or styling beyond adding the new tab/filter
+- Follow the exact same code pattern used to register existing sources
+
+==============================================================
+VERIFICATION CHECKLIST ONCE DONE
+==============================================================
+
+[ ] All 5 region tabs appear in the UI with correct emoji labels
+[ ] Each region shows both Tech and General News articles
+[ ] Secondary [All] [Tech] [General News] filter works within each region
+[ ] At least 3 articles load from general news feeds per region on first scrape
+[ ] Articles are tagged with correct region AND category values
+[ ] Belgian sources (VRT NWS, Brussels Times, Le Soir) appear under 🇪🇺 Europe
+[ ] Euronews appears under 🇪🇺 Europe General News
+[ ] Al Jazeera appears under 🌍 Middle East General News
+[ ] NDTV / The Hindu appear under 🌏 Asia General News
+[ ] BBC World / Reuters appear under 🌐 Rest of World General News
+[ ] Existing Global Tech feeds and Middle East Tech feeds are unaffected
+[ ] No RSS fetch errors crash the app (graceful skip on 403/timeout)

@@ -1,0 +1,145 @@
+There are two bugs in the topic filtering system. Fix both surgically — do not refactor or restructure anything else.
+
+==============================================================
+BUG 1 — Wrong articles show when multiple topics are selected
+==============================================================
+
+FILE: storage.ts (lines 20–35)
+
+ROOT CAUSE:
+When "Trending" is included alongside other topics (e.g. ["Trending", "Tech"]),
+the current code detects "Trending" and skips topic filtering entirely.
+This means Tech, Science, etc. are silently ignored.
+
+CURRENT BROKEN LOGIC (approximately):
+  if (topics.includes("Trending")) {
+    // skip WHERE topic clause → returns ALL topics for region
+  } else if (topics.length === 1) {
+    WHERE topic = $1
+  } else {
+    WHERE topic IN (...)
+  }
+
+FIX:
+Split "Trending" and real topic filters into two separate concerns:
+
+  const hasTrending = topics.includes("Trending");
+  const realTopics = topics.filter(t => t !== "Trending");
+
+  // Build the topic WHERE clause only from realTopics
+  if (realTopics.length === 1) {
+    query += ` AND topic = $${paramIndex}`;
+    params.push(realTopics[0]);
+    paramIndex++;
+  } else if (realTopics.length > 1) {
+    const placeholders = realTopics.map((_, i) => `$${paramIndex + i}`).join(", ");
+    query += ` AND topic IN (${placeholders})`;
+    params.push(...realTopics);
+    paramIndex += realTopics.length;
+  }
+  // hasTrending only controls ORDER BY, not WHERE — see Bug 2 fix below
+
+==============================================================
+BUG 2 — "Trending" does not actually sort by trending/recency
+==============================================================
+
+FILE: storage.ts (same function)
+
+ROOT CAUSE:
+"Trending" currently bypasses the topic WHERE clause but does NOT apply
+any special sort order. The result is just the default query order,
+which means all articles for the region appear, unsorted by popularity
+or recency — so it feels like the filter did nothing.
+
+FIX:
+Make "Trending" control ORDER BY, not WHERE:
+
+  // After building the WHERE clause (from Bug 1 fix above):
+  if (hasTrending) {
+    // Sort by most recent first — use publishedAt descending
+    // If you have an "importance" or "views" column, sort by that too
+    query += ` ORDER BY published_at DESC`;
+  } else {
+    query += ` ORDER BY published_at DESC`; // default — keep consistent
+  }
+
+  // In future: if a "score" or "views" column exists, Trending can use:
+  // ORDER BY score DESC, published_at DESC
+
+==============================================================
+BUG 3 — (Likely root cause of "all articles show") Topic values
+in DB may not match what the frontend sends
+==============================================================
+
+FILE: storage.ts + routes.ts
+
+CHECK THIS FIRST before assuming the SQL is wrong:
+
+  1. Run this query on your PostgreSQL database:
+       SELECT DISTINCT topic FROM articles LIMIT 50;
+     
+     Confirm the values look like: 'Tech', 'Science', 'Health', etc.
+     If they look like: 'tech', 'science', or 'TECH' — there is a
+     case mismatch. Fix it in storage.ts:
+
+       realTopics.map(t => t.toLowerCase()) // if DB stores lowercase
+       // OR
+       realTopics.map(t => t.charAt(0).toUpperCase() + t.slice(1).toLowerCase())
+
+  2. In routes.ts, after splitting the topics string, log what you receive:
+       console.log("[DEBUG] parsed topics:", topics);
+       console.log("[DEBUG] region:", region);
+     
+     Then test by selecting "Tech" in the UI and check the server log.
+     If topics is [] or ["All"] or undefined — the bug is in the
+     serialisation in use-news.ts, not in storage.ts.
+
+==============================================================
+BUG 4 — Topics filter resets when switching regions
+==============================================================
+
+FILE: Home.tsx
+
+ROOT CAUSE:
+If region change triggers a re-render or re-mount that re-reads
+localStorage without preserving the current in-memory topics state,
+the topics reset to the default.
+
+FIX:
+When region changes, update ONLY the region key in the filters state,
+not the entire filters object:
+
+  // WRONG — this resets topics:
+  setFilters({ region: newRegion, topics: defaultTopics });
+
+  // CORRECT — preserve existing topics:
+  setFilters(prev => ({ ...prev, region: newRegion }));
+
+Also ensure the region selector's onChange handler uses the functional
+updater form above, not a full object replacement.
+
+==============================================================
+TESTING CHECKLIST — verify each after fixing
+==============================================================
+
+[ ] Select only "Tech" → only Tech articles appear
+[ ] Select only "Science" → only Science articles appear
+[ ] Select "Tech" + "Health" → both Tech and Health appear, nothing else
+[ ] Select "Trending" alone → most recent articles across all topics appear,
+    sorted newest first
+[ ] Select "Trending" + "Tech" → only Tech articles, sorted newest first
+[ ] Switch region from Europe to Asia → topic selection is preserved
+[ ] Switch region back → topic selection still preserved
+[ ] Select "All" → all articles for the region appear (no topic filter)
+[ ] Open app fresh → filters load correctly from localStorage
+
+==============================================================
+DO NOT CHANGE
+==============================================================
+
+- Do not touch the RSS fetching logic
+- Do not change the OpenAI categorisation pipeline
+- Do not modify the DB schema
+- Do not change any UI components or styling
+- Only touch: storage.ts (SQL query builder), routes.ts (debug logs),
+  Home.tsx (region change handler)
